@@ -1,0 +1,15 @@
+{
+  "name": "txtdb",
+  "version": "1.0.0",
+  "description": "A database that utilizes text files to it's advantage by using some cool .split logic",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "db",
+    "database"
+  ],
+  "author": "EnZon3",
+  "license": "GPL-3.0-or-later"
+}
