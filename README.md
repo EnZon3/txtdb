@@ -14,7 +14,7 @@ npm i txtdb
 ### Setup up txtdb
 ```javascript
 const db = require('txtdb');
-db.setup('./db.txt');
+db.setup('[insert db file location here].txt');
 ```
 
 ### Get a value
