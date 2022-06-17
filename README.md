@@ -20,7 +20,7 @@ db.setup('[insert db file location here].txt');
 ### Get a value
 ```javascript
 async function getKey() {
-    const key = 'Test';
+    const key = 'key';
     const value = await db.getKey(key);
     console.log(value);
 }
@@ -31,12 +31,12 @@ getKey();
 ### Set a value
 Quick warning, when you set a key, if there was a key of the same name before, this command would ***overwrite*** it.
 ```javascript
-db.setKey('test', '123');
+db.setKey('key', 'value');
 ```
 
 ### Delete a value
 ```javascript
-db.deleteKey('test');
+db.deleteKey('key');
 ```
 
 ## Contributing
