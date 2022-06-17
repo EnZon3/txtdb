@@ -12,5 +12,9 @@
     "backend"
   ],
   "author": "EnZon3",
-  "license": "GPL-3.0-or-later"
+  "license": "GPL-3.0-or-later",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/EnZon3/txtdb.git"
+  }
 }
