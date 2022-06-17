@@ -12,27 +12,6 @@ async function decodeDB(text) {
     return decoded;
 }
 
-//Function shamelessly stolen from grepper, to find it search in google 'binary search grepper', it should be the second snippet
-function binarySearch(arr, val) {
-    let start = 0;
-    let end = arr.length - 1;
-  
-    while (start <= end) {
-      let mid = Math.floor((start + end) / 2);
-  
-      if (arr[mid] === val) {
-        return mid;
-      }
-  
-      if (val < arr[mid]) {
-        end = mid - 1;
-      } else {
-        start = mid + 1;
-      }
-    }
-    return -1;
-}
-
 function setup(dbFile) {
   dbFileLocation = dbFile;
 }
@@ -51,9 +30,9 @@ async function getKey(key) {
 
 async function setKey(key, value) {
 
-    const getKey = await getKey(key);
+    const getkey = await getKey(key);
 
-    if (getKey === 'Key not found') {
+    if (getkey === 'Key not found') {
         throw new Error('Key already exists');
     } else {
         const db = await decodeDB(fs.readFileSync(dbFileLocation, 'utf8'));
