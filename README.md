@@ -1,6 +1,6 @@
 # txtdb
 
-txtdb is a simple database that is based off of text files formatted in a special way.
+txtdb is a simple database based on text files formatted in a special way.
 
 ## Installation
 
