@@ -12,6 +12,7 @@ async function decodeDB(text) {
     return decoded;
 }
 
+
 function setup(dbFile) {
   dbFileLocation = dbFile;
 }
@@ -33,14 +34,14 @@ async function setKey(key, value) {
     const getkey = await getKey(key);
 
     if (getkey === 'Key not found') {
-        throw new Error('Key already exists');
-    } else {
         const db = await decodeDB(fs.readFileSync(dbFileLocation, 'utf8'));
         let serializedKey = `${key},${value}`;
         let newDB = `${db},${serializedKey}`;
         let encodedDB = await encode(newDB);
         fs.writeFileSync(dbFileLocation, encodedDB);
         return 0;
+    } else {
+        throw new Error('Key already exists');
     }
 }
 
