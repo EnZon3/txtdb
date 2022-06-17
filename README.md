@@ -4,9 +4,9 @@ txtdb is a simple database based on text files formatted in a special way.
 
 ## Installation
 
-***(I HAVE NOT GAINED ACCESS YET TO THE PACKAGE, RIGHT NOW THE PACKAGE IS A SECURITY HOLDER. I AM CONTACTING NPM SUPPORT.)*** Use the package manager [npm](https://npmjs.com) to install txtdb.
+***Name will be changed soon to txtdb*** Use the package manager [npm](https://npmjs.com) to install txtdb.
 ```bash
-npm i txtdb
+npm i txt-db
 ```
 
 ## Usage
