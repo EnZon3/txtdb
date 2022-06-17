@@ -38,3 +38,6 @@ db.setKey('test', '123');
 ```javascript
 db.deleteKey('test');
 ```
+
+## Contributing
+Please don't request for write access to the repository, instead, fork the repository and open a PR describing what you would like to change in depth.
