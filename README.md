@@ -2,7 +2,7 @@
 
 ![logo](https://res.cloudinary.com/enzon3/image/upload/v1655678333/txtdb_logo_u0eo85.png)
 
-txtdb is a simple database based on text files formatted in a special way.
+txtdb is a simple key-based database based on text files formatted in a special way.
 
 ## Installation
 
