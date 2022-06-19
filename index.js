@@ -77,7 +77,9 @@ async function deleteKey(key) {
         return 'Key not found';
     }
 
-    const newDB = db.replace(`${splitDB[keyIndex]},${splitDB[keyIndex + 1]},`, '');
+    splitDB.splice(keyIndex, 1);
+    splitDB.splice(keyIndex, 1);
+    const newDB = splitDB.join(',');
     const encodedDB = await encode(newDB);
     fs.writeFileSync(dbFileLocation, encodedDB);
     return 0;
