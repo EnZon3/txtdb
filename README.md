@@ -19,13 +19,12 @@ db.setup('[insert db file location here].txt');
 
 ### Get a value
 ```javascript
-async function getKey() {
-    const key = 'key';
+async function getKey(key) {
     const value = await db.getKey(key);
-    console.log(value);
+    return value;
 }
 
-getKey();
+getKey(key);
 ```
 
 ### Set a value
