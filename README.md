@@ -4,9 +4,9 @@ txtdb is a simple database based on text files formatted in a special way.
 
 ## Installation
 
-***PACKAGE HAS NOT BEEN PUBLISHED YET DUE TO NAMING ISSUES, INSTEAD, DOWNLOAD INDEX.JS*** Use the package manager [npm](https://npmjs.com) to install txtdb.
+Use the package manager [npm](https://npmjs.com) to install txtdb.
 ```bash
-npm i txtdb
+npm i @EnZon3/txtdb
 ```
 
 ## Usage
