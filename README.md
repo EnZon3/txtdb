@@ -1,4 +1,4 @@
-# txtdb
+# txtdb [](https://img.shields.io/github/license/enzon3/txtdb)
 
 txtdb is a simple database based on text files formatted in a special way.
 
