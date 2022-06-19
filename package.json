@@ -1,5 +1,5 @@
 {
-  "name": "@EnZon3/txtdb",
+  "name": "@enzon3/txtdb",
   "version": "1.0.0",
   "description": "A database that utilizes text files to it's advantage by using some cool .split logic",
   "main": "index.js",

@@ -6,7 +6,7 @@ txtdb is a simple database based on text files formatted in a special way.
 
 Use the package manager [npm](https://npmjs.com) to install txtdb.
 ```bash
-npm i @EnZon3/txtdb
+npm i @enzon3/txtdb
 ```
 
 ## Usage
