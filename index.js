@@ -1,6 +1,7 @@
 const fs = require('fs');
 
 let dbFileLocation;
+let allowDBOverwrite = false;
 
 async function encode(text) {
     const encoded = Buffer.from(text).toString('base64');
@@ -13,8 +14,10 @@ async function decodeDB(text) {
 }
 
 
-function setup(dbFile) {
-  dbFileLocation = dbFile;
+function setup(dbFile, overwrite) {
+    dbFileLocation = dbFile;
+    allowDBOverwrite = overwrite;
+    console.log(`DB initialized, settings: DB locatation: ${dbFileLocation}, AllowOverwrite: ${overwrite}`);
 }
 
 async function getKey(key) {
@@ -29,6 +32,22 @@ async function getKey(key) {
     return splitDB[keyIndex + 1];
 }
 
+async function overwriteKey(key, value) {
+    const db = await decodeDB(fs.readFileSync(dbFileLocation, 'utf8'));
+    const splitDB = db.split(',');
+    const keyIndex = splitDB.indexOf(key);
+
+    if (keyIndex === -1) {
+        return 'Key not found';
+    }
+
+    splitDB[keyIndex + 1] = value;
+    const newDB = splitDB.join(',');
+    const encodedDB = await encode(newDB);
+    fs.writeFileSync(dbFileLocation, encodedDB);
+    return 0;
+}
+
 async function setKey(key, value) {
 
     const getkey = await getKey(key);
@@ -41,7 +60,11 @@ async function setKey(key, value) {
         fs.writeFileSync(dbFileLocation, encodedDB);
         return 0;
     } else {
-        throw new Error('Key already exists');
+        if (allowDBOverwrite) {
+            return await overwriteKey(key, value);
+        } else {
+            throw new Error('Key already exists');
+        }
     }
 }
 
