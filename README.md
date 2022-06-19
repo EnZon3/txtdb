@@ -1,6 +1,6 @@
 # txtdb  ![GitHub](https://img.shields.io/github/license/enzon3/txtdb) ![npm](https://img.shields.io/npm/v/@enzon3/txtdb) ![GitHub package.json dynamic](https://img.shields.io/github/package-json/keywords/enzon3/txtdb) ![npm bundle size](https://img.shields.io/bundlephobia/min/@enzon3/txtdb)
 
-![logo](https://bit.ly/3N3jEqn)
+![logo](https://res.cloudinary.com/enzon3/image/upload/v1655678333/txtdb_logo_u0eo85.png)
 
 txtdb is a simple database based on text files formatted in a special way.
 
