@@ -2,6 +2,7 @@ const fs = require('fs');
 
 let dbFileLocation;
 let allowDBOverwrite = false;
+let del;
 
 async function encode(text) {
     const encoded = Buffer.from(text).toString('base64');
@@ -28,15 +29,27 @@ const binarySearch = (arr, x , start=0, end=arr.length) => {
     else return binarySearch(arr, x , start, mid-1);
 }
 
-function setup(dbFile, overwrite) {
+function setup(dbFile, overwrite, delimiter) {
     dbFileLocation = dbFile;
     allowDBOverwrite = overwrite;
-    console.log(`DB initialized, settings: DB locatation: ${dbFileLocation}, AllowOverwrite: ${overwrite}`);
+    del = delimiter;
+
+    if (!del) {
+        console.log('No delimiter specified, using default ","');
+        del = ',';
+    }
+
+    if (!fs.existsSync(dbFileLocation)) {
+        console.log('DB file does not exist, creating new file');
+        fs.writeFileSync(dbFileLocation, '');
+    }
+
+    console.log(`DB initialized, settings: DB locatation: ${dbFileLocation}, AllowOverwrite: ${overwrite}, Delimiter: ${del}`);
 }
 
 async function getKey(key) {
     const db = await decodeDB(fs.readFileSync(dbFileLocation, 'utf8'));
-    const splitDB = db.split(',');
+    const splitDB = db.split(del);
     const keyIndex = binarySearch(splitDB, key);
 
     if (keyIndex === -1) {
@@ -48,7 +61,7 @@ async function getKey(key) {
 
 async function overwriteKey(key, value) {
     const db = await decodeDB(fs.readFileSync(dbFileLocation, 'utf8'));
-    const splitDB = db.split(',');
+    const splitDB = db.split(del);
     const keyIndex = binarySearch(splitDB, key);
 
     if (keyIndex === -1) {
@@ -56,7 +69,7 @@ async function overwriteKey(key, value) {
     }
 
     splitDB[keyIndex + 1] = value;
-    const newDB = splitDB.join(',');
+    const newDB = splitDB.join(del);
     const encodedDB = await encode(newDB);
     fs.writeFileSync(dbFileLocation, encodedDB);
     return 0;
@@ -68,8 +81,8 @@ async function setKey(key, value) {
 
     if (getkey === 'Key not found') {
         const db = await decodeDB(fs.readFileSync(dbFileLocation, 'utf8'));
-        let serializedKey = `${key},${value}`;
-        let newDB = `${db},${serializedKey}`;
+        let serializedKey = `${key}${del}${value}`;
+        let newDB = `${db}${del}${serializedKey}`;
         let encodedDB = await encode(newDB);
         fs.writeFileSync(dbFileLocation, encodedDB);
         return 0;
@@ -84,7 +97,7 @@ async function setKey(key, value) {
 
 async function deleteKey(key) {
     const db = await decodeDB(fs.readFileSync(dbFileLocation, 'utf8'));
-    const splitDB = db.split(',');
+    const splitDB = db.split(del);
     const keyIndex = binarySearch(splitDB, key);
 
     if (keyIndex === -1) {
@@ -93,7 +106,7 @@ async function deleteKey(key) {
 
     splitDB.splice(keyIndex, 1);
     splitDB.splice(keyIndex, 1);
-    const newDB = splitDB.join(',');
+    const newDB = splitDB.join(del);
     const encodedDB = await encode(newDB);
     fs.writeFileSync(dbFileLocation, encodedDB);
     return 0;
