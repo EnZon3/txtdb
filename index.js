@@ -1,4 +1,5 @@
 const fs = require('fs');
+const search = require('./search.js');
 
 let dbFileLocation;
 let allowDBOverwrite = false;
@@ -12,21 +13,6 @@ async function encode(text) {
 async function decodeDB(text) {
     const decoded = Buffer.from(text, 'base64').toString('ascii');
     return decoded;
-}
-
-const binarySearch = (arr, x , start=0, end=arr.length) => {
-    // If the item does not exist, return -1
-    if(end < start) return -1;
-    
-    // Calculate middle index of the array
-    let mid = Math.floor((start + end) / 2);
-    
-    // Is the middle a match?
-    if(arr[mid] === x) return mid;
-    // Is the middle less than x
-    if(arr[mid] < x) return binarySearch(arr, x, mid+1, end);
-    // Else the middle is more than x
-    else return binarySearch(arr, x , start, mid-1);
 }
 
 function setup(dbFile, overwrite, delimiter) {
@@ -50,7 +36,7 @@ function setup(dbFile, overwrite, delimiter) {
 async function getKey(key) {
     const db = await decodeDB(fs.readFileSync(dbFileLocation, 'utf8'));
     const splitDB = db.split(del);
-    const keyIndex = binarySearch(splitDB, key);
+    const keyIndex = await search.search(splitDB, key);
 
     if (keyIndex === -1) {
         return 'Key not found';
@@ -62,7 +48,7 @@ async function getKey(key) {
 async function overwriteKey(key, value) {
     const db = await decodeDB(fs.readFileSync(dbFileLocation, 'utf8'));
     const splitDB = db.split(del);
-    const keyIndex = binarySearch(splitDB, key);
+    const keyIndex = await search.search(splitDB, key);
 
     if (keyIndex === -1) {
         return 'Key not found';
@@ -98,7 +84,7 @@ async function setKey(key, value) {
 async function deleteKey(key) {
     const db = await decodeDB(fs.readFileSync(dbFileLocation, 'utf8'));
     const splitDB = db.split(del);
-    const keyIndex = binarySearch(splitDB, key);
+    const keyIndex = await search.search(splitDB, key);
 
     if (keyIndex === -1) {
         return 'Key not found';
