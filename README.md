@@ -25,8 +25,13 @@ npm i @enzon3/txtdb
 ### Setup up txtdb
 The second parameter is a boolean for whether or not to overwrite already existing keys.
 ```javascript
-const db = require('txtdb');
-db.setup('[insert db file location here].txt', true);
+const settings = {
+    dbFile: './db.txt',
+    allowOverwrite: true,
+    delimiter: '|',
+    enableCache: false
+}
+db.setup(settings);
 ```
 
 ### Get a value

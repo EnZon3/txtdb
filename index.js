@@ -21,12 +21,12 @@ async function decodeDB(text) {
 
 
 
-function setup(dbFile, overwrite, delimiter, enableCache) {
-    dbFileLocation = dbFile;
-    allowDBOverwrite = overwrite;
-    del = delimiter;
+function setup(settings) {
+    dbFileLocation = settings.dbFile;
+    allowDBOverwrite = settings.allowOverwrite;
+    del = settings.delimiter;
 
-    if (enableCache) {
+    if (settings.enableCache) {
         cacheEnabled = true;
     }
 
@@ -40,7 +40,7 @@ function setup(dbFile, overwrite, delimiter, enableCache) {
         fs.writeFileSync(dbFileLocation, '');
     }
 
-    console.log(`DB initialized, settings: DB locatation: ${dbFileLocation}, AllowOverwrite: ${overwrite}, Delimiter: ${del}, Cache: ${enableCache}`);
+    console.log(`DB initialized, settings: DB locatation: '${dbFileLocation}', AllowOverwrite: ${settings.allowOverwrite}, Delimiter: '${del}', Cache: ${settings.enableCache}`);
 }
 
 async function updateCache() {
