@@ -6,12 +6,12 @@ txtdb is a simple key-based database based on text files formatted in a special 
 
 ## Features
 
-    * **Key-based**
-    * **Simple**
-    * **Fast**
-    * **Easy to use**
-    * **Cache**
-    * **Up to 2000 keys**
+    *Key-based
+    *Simple
+    *Fast
+    *Easy to use
+    *Cache
+    *Up to 2000 keys
 
 ## Installation
 
