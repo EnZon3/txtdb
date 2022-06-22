@@ -22,9 +22,9 @@ async function search(array, key) {
     }
 }
 
-async function search_t1(array, key) {
-    for (let i = 0; i < array.length / 2; i++) {
-        if (array[i] === key) {
+async function search_t1(arr, key) {
+    for (let i = 0; i < arr.length / 2; i++) {
+        if (arr[i] === key) {
             return i;
         }
     }

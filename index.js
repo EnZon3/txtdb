@@ -4,6 +4,10 @@ const search = require('./search.js');
 let dbFileLocation;
 let allowDBOverwrite = false;
 let del;
+let cacheEnabled = false;
+var cache;
+let keyIndex;
+var splitDB;
 
 async function encode(text) {
     const encoded = Buffer.from(text).toString('base64');
@@ -15,10 +19,16 @@ async function decodeDB(text) {
     return decoded;
 }
 
-function setup(dbFile, overwrite, delimiter) {
+
+
+function setup(dbFile, overwrite, delimiter, enableCache) {
     dbFileLocation = dbFile;
     allowDBOverwrite = overwrite;
     del = delimiter;
+
+    if (enableCache) {
+        cacheEnabled = true;
+    }
 
     if (!del) {
         console.log('No delimiter specified, using default ","');
@@ -30,19 +40,40 @@ function setup(dbFile, overwrite, delimiter) {
         fs.writeFileSync(dbFileLocation, '');
     }
 
-    console.log(`DB initialized, settings: DB locatation: ${dbFileLocation}, AllowOverwrite: ${overwrite}, Delimiter: ${del}`);
+    console.log(`DB initialized, settings: DB locatation: ${dbFileLocation}, AllowOverwrite: ${overwrite}, Delimiter: ${del}, Cache: ${enableCache}`);
+}
+
+async function updateCache() {
+    const db = await decodeDB(fs.readFileSync(dbFileLocation, 'utf8'));
+    const splitDB = db.split(del);
+    cache = splitDB;
+    console.log('Cache updated');
+    //console.log(cache);
+    return 0;
 }
 
 async function getKey(key) {
-    const db = await decodeDB(fs.readFileSync(dbFileLocation, 'utf8'));
-    const splitDB = db.split(del);
-    const keyIndex = await search.search(splitDB, key);
+    if (!cacheEnabled) {
+        const db = await decodeDB(fs.readFileSync(dbFileLocation, 'utf8'));
+        splitDB = db.split(del);
+        keyIndex = await search.search(splitDB, key);
+    } else {
+        if (cache === undefined) {
+            await updateCache();
+        }
+        console.log(cache);
+        keyIndex = await search.search(cache, key);
+    }
 
     if (keyIndex === -1) {
         return 'Key not found';
     }
     
-    return splitDB[keyIndex + 1];
+    if (!cacheEnabled) {
+        return splitDB[keyIndex + 1];
+    } else {
+        return cache[keyIndex + 1];
+    }
 }
 
 async function overwriteKey(key, value) {
