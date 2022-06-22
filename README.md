@@ -41,7 +41,8 @@ async function getKey(key) {
     return value;
 }
 
-getKey(key);
+var key = getKey('key');
+// do something with key
 ```
 
 ### Set a value
