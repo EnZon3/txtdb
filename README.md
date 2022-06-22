@@ -46,7 +46,7 @@ var key = getKey('key');
 ```
 
 ### Set a value
-Quick warning, when you set a key, if there was a key of the same name before, this command would ***overwrite*** it.
+Quick warning, if the AllowOverwrite flag in the setup function is set to true, and if there was a key of the same name before, this command would ***overwrite*** it.
 ```javascript
 db.setKey('key', 'value');
 ```
