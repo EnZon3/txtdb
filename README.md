@@ -4,6 +4,15 @@
 
 txtdb is a simple key-based database based on text files formatted in a special way.
 
+## Features
+
+    * **Key-based**
+    * **Simple**
+    * **Fast**
+    * **Easy to use**
+    * **Cache**
+    * **Up to 2000 keys**
+
 ## Installation
 
 Use the package manager [npm](https://npmjs.com) to install txtdb.
