@@ -26,9 +26,9 @@ npm i @enzon3/txtdb
 The second parameter is a boolean for whether or not to overwrite already existing keys.
 ```javascript
 const settings = {
-    dbFile: './db.txt',
+    dbFile: '[db file location here].txt',
     allowOverwrite: true,
-    delimiter: '|',
+    delimiter: 'any delimiter you want, for example: "|"',
     enableCache: false
 }
 db.setup(settings);
